@@ -108,8 +108,13 @@ namespace big
 			{
 				char message[256];
 				buffer.ReadString(message, 256);
-				bool is_team;
-				buffer.ReadBool(&is_team);
+
+				rage::rlGamerHandle temp{};
+				gamer_handle_deserialize(temp, buffer);
+
+				bool is_team = false;
+				if (msgType == rage::eNetMessage::MsgTextMessage)
+					buffer.ReadBool(&is_team);
 
 				if (player->is_spammer)
 					return true;
@@ -146,8 +151,7 @@ namespace big
 
 					if (msgType == rage::eNetMessage::MsgTextMessage && g_pointers->m_gta.m_chat_data && player->get_net_data())
 					{
-						rage::rlGamerHandle temp{};
-						gamer_handle_deserialize(temp, buffer);
+						
 
 						g_pointers->m_gta.m_handle_chat_message(*g_pointers->m_gta.m_chat_data,
 						    nullptr,
