@@ -78,7 +78,9 @@ namespace big
 
 		new_veh.handle = veh;
 		new_veh.ptr    = (CVehicle*)g_pointers->m_gta.m_handle_to_ptr(veh);
-		strcpy(new_veh.model_name, HUD::GET_FILENAME_FOR_AUDIO_CONVERSATION(VEHICLE::GET_DISPLAY_NAME_FROM_VEHICLE_MODEL(ENTITY::GET_ENTITY_MODEL(veh))));
+		strncpy(new_veh.model_name,
+		    HUD::GET_FILENAME_FOR_AUDIO_CONVERSATION(VEHICLE::GET_DISPLAY_NAME_FROM_VEHICLE_MODEL(ENTITY::GET_ENTITY_MODEL(veh))),
+		    sizeof(new_veh.model_name));
 		new_veh.door_count     = VEHICLE::GET_NUMBER_OF_VEHICLE_DOORS(veh);
 		new_veh.lock_state     = (eVehicleLockState)VEHICLE::GET_VEHICLE_DOOR_LOCK_STATUS(veh);
 		new_veh.is_convertible = VEHICLE::IS_VEHICLE_A_CONVERTIBLE(veh, 0);

@@ -68,7 +68,7 @@ namespace big
 		{
 			ImFontConfig fnt_cfg{};
 			fnt_cfg.FontDataOwnedByAtlas = false;
-			strcpy(fnt_cfg.Name, std::format("Fnt{}px", (int)size).c_str());
+			strncpy(fnt_cfg.Name, std::format("Fnt{}px", (int)size).c_str(), sizeof(fnt_cfg.Name));
 
 			*font_ptr = io.Fonts->AddFontFromMemoryTTF(const_cast<uint8_t*>(font_storopia),
 			    sizeof(font_storopia),

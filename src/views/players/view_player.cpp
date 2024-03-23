@@ -37,7 +37,7 @@ namespace big
 			{
 				name_appendage += std::format(" [{}]", "TRUST"_T);
 			}
-			strcpy(player_tab.name, std::format("{} ({}){}", current_player->get_name(), current_player->id(), name_appendage).c_str());
+			strncpy(player_tab.name, std::format("{} ({}){}", current_player->get_name(), current_player->id(), name_appendage).c_str(), sizeof(player_tab.name));
 
 			view::player_info();
 			ImGui::SameLine();

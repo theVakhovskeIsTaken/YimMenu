@@ -17,7 +17,7 @@ namespace big
 			node->m_clan_data.m_clan_member_count = 15;
 			node->m_clan_data.m_clan_created_time = 420;
 
-			strcpy(node->m_clan_data.m_clan_tag, g.spoofing.crew_tag.c_str());
+			strncpy(node->m_clan_data.m_clan_tag, g.spoofing.crew_tag.c_str(), sizeof(node->m_clan_data.m_clan_tag));
 			node->m_clan_data.m_is_system_clan = g.spoofing.rockstar_crew;
 			node->m_clan_data.m_is_clan_open   = g.spoofing.square_crew_tag;
 
