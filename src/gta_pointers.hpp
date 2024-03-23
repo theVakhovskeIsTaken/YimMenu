@@ -365,6 +365,9 @@ namespace big
 		functions::received_clone_remove m_received_clone_remove;
 
 		CWeaponInfoManager* m_weapon_info_manager;
+
+		PVOID m_should_target_entity;
+		PVOID m_get_assisted_aim_type;
 	};
 #pragma pack(pop)
 	static_assert(sizeof(gta_pointers) % 8 == 0, "Pointers are not properly aligned");

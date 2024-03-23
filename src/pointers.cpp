@@ -1772,6 +1772,24 @@ namespace big
             {
                 g_pointers->m_gta.m_weapon_info_manager = ptr.add(3).rip().sub(72).as<CWeaponInfoManager*>();
             }
+        },
+        // Should Target Entity
+        {
+            "STE",
+            "48 8B C4 48 89 58 08 48 89 68 10 48 89 70 18 48 89 78 20 41 57 48 81 EC A0 00 00 00 0F",
+            [](memory::handle ptr)
+            {
+                g_pointers->m_gta.m_should_target_entity = ptr.as<PVOID>();
+            }
+        },
+        // Get Assisted Aim Type
+        {
+            "GAAT",
+            "48 89 5C 24 08 48 89 74 24 10 57 48 83 EC 20 48 8B F9 E8 ? ? ? ? 33 F6 48 85",
+            [](memory::handle ptr)
+            {
+                g_pointers->m_gta.m_get_assisted_aim_type = ptr.as<PVOID>();
+            }
         }
         >(); // don't leave a trailing comma at the end
 

@@ -179,30 +179,6 @@ namespace big
 		ImGui::SameLine();
 		components::command_checkbox<"aimbot">();
 
-		if (g.weapons.aimbot.enable)
-		{
-			components::command_checkbox<"aimatplayer">();
-			ImGui::SameLine();
-			components::command_checkbox<"aimatnpc">();
-			ImGui::SameLine();
-			components::command_checkbox<"aimatpolice">();
-			ImGui::SameLine();
-			components::command_checkbox<"aimatenemy">();
-
-			components::command_checkbox<"smoothing">();
-			if (g.weapons.aimbot.smoothing)
-			{
-				ImGui::SameLine();
-				ImGui::PushItemWidth(220);
-				ImGui::SliderFloat("VIEW_WEAPON_AIM_SPEED"_T.data(), &g.weapons.aimbot.smoothing_speed, 1.f, 8.f, "%.1f");
-				ImGui::PopItemWidth();
-			}
-			ImGui::PushItemWidth(350);
-			ImGui::SliderFloat("VIEW_WEAPON_AIM_FOV"_T.data(), &g.weapons.aimbot.fov, 1.f, 360.f, "%.0f");
-			ImGui::SliderFloat("VIEW_SELF_CUSTOM_TELEPORT_DISTANCE"_T.data(), &g.weapons.aimbot.distance, 1.f, 1000.f, "%.0f");
-			ImGui::PopItemWidth();
-		}
-
 		if (ImGui::CollapsingHeader("VIEW_WEAPON_AMMUNATION"_T.data()))
 		{
 			static Hash selected_weapon_hash, selected_weapon_attachment_hash{};
