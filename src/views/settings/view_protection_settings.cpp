@@ -18,6 +18,7 @@ namespace big
 		ImGui::BeginGroup();
 		ImGui::Checkbox("BOUNTY"_T.data(), &g.protections.script_events.bounty);
 		ImGui::Checkbox("CEO_MONEY"_T.data(), &g.protections.script_events.ceo_money);
+		ImGui::Checkbox("CEO_JOIN"_T.data(), &g.protections.script_events.ceo_join);
 		ImGui::Checkbox("FORCE_MISSION"_T.data(), &g.protections.script_events.force_mission);
 		ImGui::Checkbox("FORCE_TELEPORT"_T.data(), &g.protections.script_events.force_teleport);
 		ImGui::Checkbox("GTA_BANNER"_T.data(), &g.protections.script_events.gta_banner);

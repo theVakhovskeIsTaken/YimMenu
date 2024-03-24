@@ -369,6 +369,7 @@ namespace big
 		PVOID m_should_not_target_entity;
 		PVOID m_get_assisted_aim_type;
 		PVOID m_should_allow_driver_lock_on;
+		PVOID m_get_lockon_pos;
 	};
 #pragma pack(pop)
 	static_assert(sizeof(gta_pointers) % 8 == 0, "Pointers are not properly aligned");

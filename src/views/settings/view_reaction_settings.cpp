@@ -69,6 +69,7 @@ namespace big
 		draw_reaction(g.reactions.bounty);
 		draw_reaction(g.reactions.ceo_kick);
 		draw_reaction(g.reactions.ceo_money);
+		draw_reaction(g.reactions.ceo_join);
 		draw_reaction(g.reactions.clear_wanted_level);
 		draw_reaction(g.reactions.crash);
 		draw_reaction(g.reactions.end_session_kick);

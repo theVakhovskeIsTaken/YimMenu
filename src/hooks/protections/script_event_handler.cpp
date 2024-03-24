@@ -418,6 +418,16 @@ namespace big
 			}
 			break;
 		}
+		case eRemoteEvent::RequestJoinCEO:
+		{
+			if (!plyr->invited_to_ceo && g.protections.script_events.ceo_join)
+			{
+				g.reactions.ceo_join.process(plyr);
+				return true;
+			}
+			plyr->invited_to_ceo = false;
+			break;
+		}
 		}
 
 		// detect pasted menus setting args[1] to something other than PLAYER_ID()

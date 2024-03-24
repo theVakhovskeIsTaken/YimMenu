@@ -9,11 +9,38 @@
 #include "util/notify.hpp"
 
 #include <script/globals/GlobalPlayerBD.hpp>
+#include <script/globals/GPBD_FM_3.hpp>
+
+namespace
+{
+	inline bool is_player_our_goon(Player sender)
+	{
+		auto& boss_goon = big::scr_globals::gpbd_fm_3.as<GPBD_FM_3*>()->Entries[self::id].BossGoon;
+
+		if (boss_goon.Boss != self::id)
+			return false;
+
+		for (int i = 0; i < boss_goon.Goons.Size; i++)
+		{
+			if (boss_goon.Goons[i] == sender)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+}
 
 namespace big
 {
 	bool hooks::received_array_update(rage::netArrayHandlerBase* array, CNetGamePlayer* sender, rage::datBitBuffer* buffer, int size, std::int16_t cycle)
 	{
+		bool is_gpbd_fm_3 = (array->m_array >= scr_globals::gpbd_fm_3.as<uint8_t*>()
+		    && array->m_array <= scr_globals::gpbd_fm_3.at(31, sizeof(GPBD_FM_3) / 8).as<uint8_t*>());
+		bool was_our_associate =
+		    is_gpbd_fm_3 && scr_globals::gpbd_fm_3.as<GPBD_FM_3*>()->Entries[sender->m_player_id].BossGoon.Boss == self::id;
+
 		int old_beast_index = -1;
 		int participant_id  = 0;
 		auto beast          = gta_util::find_script_thread("am_hunt_the_beast"_J);
@@ -70,6 +97,20 @@ namespace big
 
 			if (auto plyr = g_player_service->get_by_id(sender->m_player_id))
 				g.reactions.end_session_kick.process(plyr);
+		}
+
+		if (is_gpbd_fm_3 && !was_our_associate
+			&& scr_globals::gpbd_fm_3.as<GPBD_FM_3*>()->Entries[sender->m_player_id].BossGoon.Boss == self::id && g.protections.script_events.ceo_join)
+		{
+			if (auto plyr = g_player_service->get_by_id(sender->m_player_id))
+			{
+				if (!is_player_our_goon(plyr->id()) && (big::scr_globals::gpbd_fm_3.as<GPBD_FM_3*>()->Entries[self::id].BossGoon.GoonsRequestingJoin & (1 << plyr->id())) == 0)
+				{
+					g.reactions.ceo_join.process(plyr);
+					scr_globals::gpbd_fm_3.as<GPBD_FM_3*>()->Entries[sender->m_player_id].BossGoon.Boss = -1;
+					plyr->ceo_kick                                                                      = true; // force player out
+				}
+			}
 		}
 
 		return result;

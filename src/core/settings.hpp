@@ -180,6 +180,7 @@ namespace big
 			reaction bounty{"Bounty", "REACTION_BOUNTY_NOTIFY", "REACTION_BOUNTY_ANNOUNCE"};
 			reaction ceo_kick{"CEO Kick", "REACTION_CEO_KICK_NOTIFY", "REACTION_CEO_KICK_ANNOUNCE"};
 			reaction ceo_money{"CEO Money", "REACTION_CEO_MONEY_NOTIFY", "REACTION_CEO_MONEY_ANNOUNCE"};
+			reaction ceo_join{"CEO Join", "REACTION_CEO_JOIN_NOTIFY", "REACTION_CEO_JOIN_ANNOUNCE"};
 			reaction clear_wanted_level{"Clear Wanted Level", "REACTION_CLEAR_WANTED_LEVEL_NOTIFY", "REACTION_CLEAR_WANTED_LEVEL_ANNOUNCE"};
 			reaction crash{"Crash", "REACTION_CRASH_NOTIFY", "REACTION_CRASH_ANNOUNCE"};
 			reaction end_session_kick{"End Session Kick", "REACTION_END_SESSION_KICK_NOTIFY", "REACTION_GENERIC_KICK_ANNOUNCE"};
@@ -224,7 +225,7 @@ namespace big
 			reaction spectate{"Spectate", "REACTION_SPECTATING_NOTIFY", "REACTION_SPECTATING_ANNOUNCE"};
 			interloper_reaction spectate_others{"Spectate Others", "REACTION_SPECTATING_OTHERS_NOTIFY", "REACTION_SPECTATING_OTHERS_ANNOUNCE", false, false};
 
-			NLOHMANN_DEFINE_TYPE_INTRUSIVE(reactions, bounty, ceo_money, ceo_kick, clear_wanted_level, crash, end_session_kick, fake_deposit, force_mission, force_teleport, gta_banner, kick_from_interior, mc_teleport, network_bail, personal_vehicle_destroyed, remote_off_radar, rotate_cam, send_to_cutscene, send_to_location, sound_spam, spectate_notification, give_collectible, transaction_error, tse_freeze, tse_sender_mismatch, vehicle_kick, teleport_to_warehouse, trigger_business_raid, start_activity, start_script, null_function_kick, destroy_personal_vehicle, clear_ped_tasks, turn_into_beast, remote_wanted_level, remote_wanted_level_others, remote_ragdoll, kick_vote, report_cash_spawn, modder_detection, game_anti_cheat_modder_detection, request_control_event, report, send_to_interior, spectate, spectate_others)
+			NLOHMANN_DEFINE_TYPE_INTRUSIVE(reactions, bounty, ceo_money, ceo_kick, ceo_join, clear_wanted_level, crash, end_session_kick, fake_deposit, force_mission, force_teleport, gta_banner, kick_from_interior, mc_teleport, network_bail, personal_vehicle_destroyed, remote_off_radar, rotate_cam, send_to_cutscene, send_to_location, sound_spam, spectate_notification, give_collectible, transaction_error, tse_freeze, tse_sender_mismatch, vehicle_kick, teleport_to_warehouse, trigger_business_raid, start_activity, start_script, null_function_kick, destroy_personal_vehicle, clear_ped_tasks, turn_into_beast, remote_wanted_level, remote_wanted_level_others, remote_ragdoll, kick_vote, report_cash_spawn, modder_detection, game_anti_cheat_modder_detection, request_control_event, report, send_to_interior, spectate, spectate_others)
 		} reactions{};
 
 		struct player
@@ -259,6 +260,7 @@ namespace big
 			{
 				bool bounty                     = true;
 				bool ceo_money                  = true;
+				bool ceo_join                   = true;
 				bool clear_wanted_level         = true;
 				bool force_mission              = true;
 				bool force_teleport             = true;
@@ -277,7 +279,7 @@ namespace big
 				bool start_activity             = true;
 				bool send_sms                   = true;
 
-				NLOHMANN_DEFINE_TYPE_INTRUSIVE(script_events, bounty, ceo_money, clear_wanted_level, force_mission, force_teleport, gta_banner, mc_teleport, personal_vehicle_destroyed, remote_off_radar, rotate_cam, send_to_cutscene, send_to_location, sound_spam, spectate, give_collectible, vehicle_kick, teleport_to_warehouse, start_activity, send_sms)
+				NLOHMANN_DEFINE_TYPE_INTRUSIVE(script_events, bounty, ceo_money, ceo_join, clear_wanted_level, force_mission, force_teleport, gta_banner, mc_teleport, personal_vehicle_destroyed, remote_off_radar, rotate_cam, send_to_cutscene, send_to_location, sound_spam, spectate, give_collectible, vehicle_kick, teleport_to_warehouse, start_activity, send_sms)
 			} script_events{};
 
 			bool rid_join                = false;

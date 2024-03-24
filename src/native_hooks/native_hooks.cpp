@@ -11,6 +11,7 @@
 #include "network_session_host.hpp"
 #include "shop_controller.hpp"
 #include "tunables.hpp"
+#include "am_pi_menu.hpp"
 
 #include <script/scrProgram.hpp>
 #include <script/scrProgramTable.hpp>
@@ -146,6 +147,8 @@ namespace big
 		add_native_detour("tuneables_processing"_J, NativeIndex::NETWORK_ACCESS_TUNABLE_INT_HASH, tunables::NETWORK_ACCESS_TUNABLE_INT_HASH);
 		add_native_detour("tuneables_processing"_J, NativeIndex::NETWORK_ACCESS_TUNABLE_BOOL_MODIFICATION_DETECTION_REGISTRATION_HASH, tunables::NETWORK_ACCESS_TUNABLE_BOOL_MODIFICATION_DETECTION_REGISTRATION_HASH);
 		add_native_detour("tuneables_processing"_J, NativeIndex::NETWORK_ACCESS_TUNABLE_FLOAT_HASH, tunables::NETWORK_ACCESS_TUNABLE_FLOAT_HASH);
+
+		add_native_detour("am_pi_menu"_J, NativeIndex::_SEND_TU_SCRIPT_EVENT_NEW, am_pi_menu::_SEND_TU_SCRIPT_EVENT_NEW);
 
 		// TODO: is this safe?
 		add_native_detour("arena_carmod"_J, NativeIndex::FORCE_PED_AI_AND_ANIMATION_UPDATE, all_scripts::DO_NOTHING); //Fix jittering weapons.

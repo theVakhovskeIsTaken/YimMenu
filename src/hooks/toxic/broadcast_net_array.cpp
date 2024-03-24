@@ -7,15 +7,18 @@
 #include "util/system.hpp"
 
 #include <script/globals/GlobalPlayerBD.hpp>
+#include <script/globals/GPBD_FM_3.hpp>
 
 namespace big
 {
 	unsigned int hooks::broadcast_net_array(rage::netArrayHandlerBase* _this, CNetGamePlayer* target, rage::datBitBuffer* bit_buffer, uint16_t counter, uint32_t* elem_start, bool silent)
 	{
 		int orig_gsbd;
-
 		Player orig_player;
 		int orig_participant;
+		Player orig_boss; // this should always be self::id, but let's store it anyway
+
+		player_ptr plyr = g_player_service->get_by_id(target->m_player_id);
 
 		bool need_to_use_end_session_kick = g_player_service->m_player_to_use_end_session_kick
 		    && target->m_player_id == g_player_service->m_player_to_use_end_session_kick->get()->id()
@@ -32,6 +35,10 @@ namespace big
 
 		bool need_to_randomize_replay_protection =
 		    g.session.block_ceo_money && _this->m_array == scr_globals::gsbd_fm_events.as<void*>();
+
+		bool need_to_kick_player_from_ceo = plyr && plyr->ceo_kick
+		    && (_this->m_array >= scr_globals::gpbd_fm_3.as<uint8_t*>()
+		        && _this->m_array <= scr_globals::gpbd_fm_3.at(31, sizeof(GPBD_FM_3) / 8).as<uint8_t*>());
 
 		if (need_to_use_end_session_kick)
 		{
@@ -74,6 +81,14 @@ namespace big
 			broadcast_net_array::m_patch->apply();
 		}
 
+		if (need_to_kick_player_from_ceo)
+		{
+			orig_boss = scr_globals::gpbd_fm_3.as<GPBD_FM_3*>()->Entries[self::id].BossGoon.Boss;
+			scr_globals::gpbd_fm_3.as<GPBD_FM_3*>()->Entries[self::id].BossGoon.Boss = -1;
+			_this->verify_array_data_response(target, -1);
+			broadcast_net_array::m_patch->apply();
+		}
+
 		int ret = g_hooking->get_original<hooks::broadcast_net_array>()(_this, target, bit_buffer, counter, elem_start, silent);
 
 		if (need_to_use_end_session_kick)
@@ -96,6 +111,13 @@ namespace big
 
 		if (need_to_randomize_replay_protection)
 		{
+			broadcast_net_array::m_patch->restore();
+		}
+
+		if (need_to_kick_player_from_ceo)
+		{
+			plyr->ceo_kick                                                           = false;
+			scr_globals::gpbd_fm_3.as<GPBD_FM_3*>()->Entries[self::id].BossGoon.Boss = orig_boss;
 			broadcast_net_array::m_patch->restore();
 		}
 

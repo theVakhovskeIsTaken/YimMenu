@@ -100,6 +100,9 @@ namespace big
 
 		int spectating_player = -1;
 
+		bool ceo_kick = false;
+		bool invited_to_ceo = false;
+
 	protected:
 		bool equals(const CNetGamePlayer* net_game_player) const;
 

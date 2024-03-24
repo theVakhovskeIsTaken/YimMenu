@@ -198,7 +198,10 @@ namespace big
 		TriggerCEORaid         = -1906536929,
 
 		StartScriptBegin   = -366707054,
-		StartScriptProceed = 1757622014
+		StartScriptProceed = 1757622014,
+
+		RequestJoinCEO = -627920584,
+		SendCEOInvite = -245642440
 	};
 
 	enum class eCollectibleType

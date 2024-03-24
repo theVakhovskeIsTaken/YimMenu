@@ -1799,6 +1799,15 @@ namespace big
             {
                 g_pointers->m_gta.m_should_allow_driver_lock_on = ptr.as<PVOID>();
             }
+        },
+        // Get Lock-On Pos
+        {
+            "GLOP",
+            "0F 85 34 02 00 00 48 85 C9",
+            [](memory::handle ptr)
+            {
+                g_pointers->m_gta.m_get_lockon_pos = ptr.as<PVOID>();
+            }
         }
         >(); // don't leave a trailing comma at the end
 
