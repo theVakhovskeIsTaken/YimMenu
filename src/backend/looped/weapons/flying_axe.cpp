@@ -103,30 +103,30 @@ namespace big
 				{
 					Vector3 coordinates_to_spawn = ENTITY::GET_OFFSET_FROM_ENTITY_IN_WORLD_COORDS(self::ped, 0.f, 0.f, 6.5f);
 					Hash axe_model = rage::joaat("prop_ld_fireaxe");
-					while (!STREAMING::HAS_MODEL_LOADED(axe_model))
+					if (!STREAMING::HAS_MODEL_LOADED(axe_model))
 					{
 						STREAMING::REQUEST_MODEL(axe_model);
-						script::get_current()->yield();
+						return;
 					}
-					if (STREAMING::HAS_MODEL_LOADED(axe_model))
 
-						entity_axe = OBJECT::CREATE_OBJECT(axe_model,
-						    coordinates_to_spawn.x,
-						    coordinates_to_spawn.y,
-						    coordinates_to_spawn.z,
-						    ENTITY::GET_ENTITY_HEADING(self::ped),
-						    true,
-						    false);
+					entity_axe = OBJECT::CREATE_OBJECT(axe_model,
+						coordinates_to_spawn.x,
+						coordinates_to_spawn.y,
+						coordinates_to_spawn.z,
+						ENTITY::GET_ENTITY_HEADING(self::ped),
+						true,
+						false);
 
 					// not sure if needed
 					auto axe_net_id = NETWORK::OBJ_TO_NET(entity_axe);
 					NETWORK::NETWORK_REGISTER_ENTITY_AS_NETWORKED(entity_axe);
 					NETWORK::SET_NETWORK_ID_EXISTS_ON_ALL_MACHINES(axe_net_id, true);
-					//add
+
+					// add
 					Blip blip = HUD::ADD_BLIP_FOR_ENTITY(entity_axe);
 					HUD::SET_BLIP_DISPLAY(blip, 8);
 					HUD::SET_BLIP_SPRITE(blip, 154);
-					HUD::SET_BLIP_COLOUR(blip, 38);
+					HUD::SET_BLIP_COLOUR(blip, 77);
 				}
 			}
 			else
@@ -213,7 +213,7 @@ namespace big
 						Vector3 multiply = cam_direction * distance;
 						new_axe_flying_coords = cam_coords + multiply;
 						// only for controller
-						PAD::SET_CONTROL_SHAKE(0, 1, 5);
+						PAD::SET_CONTROL_SHAKE(0, 200, 5);
 					}
 				}
 				else

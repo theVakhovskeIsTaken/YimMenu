@@ -151,8 +151,6 @@ namespace big
 
 					if (msgType == rage::eNetMessage::MsgTextMessage && g_pointers->m_gta.m_chat_data && player->get_net_data())
 					{
-						
-
 						g_pointers->m_gta.m_handle_chat_message(*g_pointers->m_gta.m_chat_data,
 						    nullptr,
 						    &player->get_net_data()->m_gamer_handle,

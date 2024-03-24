@@ -1773,13 +1773,13 @@ namespace big
                 g_pointers->m_gta.m_weapon_info_manager = ptr.add(3).rip().sub(72).as<CWeaponInfoManager*>();
             }
         },
-        // Should Target Entity
+        // Should Not Target Entity
         {
-            "STE",
+            "SNTE",
             "48 8B C4 48 89 58 08 48 89 68 10 48 89 70 18 48 89 78 20 41 57 48 81 EC A0 00 00 00 0F",
             [](memory::handle ptr)
             {
-                g_pointers->m_gta.m_should_target_entity = ptr.as<PVOID>();
+                g_pointers->m_gta.m_should_not_target_entity = ptr.as<PVOID>();
             }
         },
         // Get Assisted Aim Type
@@ -1789,6 +1789,15 @@ namespace big
             [](memory::handle ptr)
             {
                 g_pointers->m_gta.m_get_assisted_aim_type = ptr.as<PVOID>();
+            }
+        },
+        // Should Allow Driver Lock-On
+        {
+            "SADLO",
+            "48 8B C4 48 89 58 08 48 89 68 10 48 89 70 18 57 41 56 41 57 48 83 EC 40 0F 29 70 D8 0F 29 78 C8 8B",
+            [](memory::handle ptr)
+            {
+                g_pointers->m_gta.m_should_allow_driver_lock_on = ptr.as<PVOID>();
             }
         }
         >(); // don't leave a trailing comma at the end

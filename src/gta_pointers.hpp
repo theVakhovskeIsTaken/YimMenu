@@ -366,8 +366,9 @@ namespace big
 
 		CWeaponInfoManager* m_weapon_info_manager;
 
-		PVOID m_should_target_entity;
+		PVOID m_should_not_target_entity;
 		PVOID m_get_assisted_aim_type;
+		PVOID m_should_allow_driver_lock_on;
 	};
 #pragma pack(pop)
 	static_assert(sizeof(gta_pointers) % 8 == 0, "Pointers are not properly aligned");

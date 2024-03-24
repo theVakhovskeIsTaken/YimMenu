@@ -179,6 +179,11 @@ namespace big
 		ImGui::SameLine();
 		components::command_checkbox<"aimbot">();
 
+		if (g.weapons.aimbot.enable)
+		{
+			components::command_checkbox<"aimbottargetdrivers">();
+		}
+
 		if (ImGui::CollapsingHeader("VIEW_WEAPON_AMMUNATION"_T.data()))
 		{
 			static Hash selected_weapon_hash, selected_weapon_attachment_hash{};
