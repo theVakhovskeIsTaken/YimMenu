@@ -21,9 +21,7 @@ namespace big
 		components::command_checkbox<"breakupcheating">();
 			
 		components::player_command_button<"smartkick">(g_player_service->get_selected());
-        ImGui::SameLine();
-		components::player_command_button<"oomkick">(g_player_service->get_selected());
-		ImGui::SameLine();	
+        ImGui::SameLine();	
 		components::player_command_button<"shkick">(g_player_service->get_selected());
         ImGui::SameLine();
 		components::player_command_button<"endkick">(g_player_service->get_selected());
